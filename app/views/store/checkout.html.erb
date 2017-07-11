@@ -1,0 +1,37 @@
+<h2>Please enter the details for your order</h2>
+
+<div class="checkout_form">
+    <%= error_messages_for 'order' %>
+    
+    <h4>Fields marked with * are required fields</h4>
+    <% form_for :order, :url => { :action => :save_order } do |form| %>
+        <fieldset>
+            
+            <div>
+                <%= form.label :name, "*Name " %>
+                <%= form.text_field :name, :size => 30 %>
+            </div>
+            <div>
+                <%= form.label :surmane, "*Surname " %>
+                <%= form.text_field :surname, :size => 30 %>
+            </div>
+            <div>
+                <%= form.label :adress, "*Adress " %>
+                <%= form.text_area :adress, :rows => 4, :cols => 35 %>
+            </div>
+            <div>
+                <%= form.label :telephone, "*Telehone " %>
+                <%= form.text_field :telephone, :size => 30 %>
+            </div>
+            <div>
+                <%= form.label :email, "*Email " %>
+                <%= form.text_field :email, :size => 30 %>
+            </div>
+            <div>
+                <%= form.label :pay_type,"*Pay type " %>
+                <%= form.select :pay_type,Order::PAYMENT_TYPES,:prompt => "Select a payment method" %>
+            </div>
+            <%= submit_tag "Place order", :name => nil, :class => "submit" %>
+          </fieldset>
+    <% end %>
+</div>

@@ -1,0 +1,33 @@
+<h2>Your shopping cart</h2>
+
+  <% if @cart.items.empty? == true%>
+    <h3 style="color:#CE5F35"><%= flash[:notice] %></h3>
+  <% else  %>
+  <h4 style="color:red"><%= flash[:notice] %></h4>
+ <%end%>
+
+<table id="show_products">
+  <% for item in @cart.items %>
+    <tr>
+        <% product = Product.find(item.product_id) %>
+        <td class = "copys_of_book"><%= item.quantity %>&times;</td>
+        <td><%=h product.title %></td>
+        <td class="item_price"><%=currency_euro (item.total_price_for_copys_of_product(item.product_id)) %></td>
+        <td><%= button_to "remove one copy from cart", :action => 'remove_one_copy_of_a_book_from_cart', :id => product.id %></td>
+        <td><%= button_to "remove copys of this book from cart", :action => 'remove_copys_of_a_book_from_cart', :id => product.id %></td>
+    </tr>
+  <% end %>
+    <tr class="total_line">
+      <td colspan="2">Total</td>
+      <td class="total_cell"><%= currency_euro (@cart.total_price_of_products) %></td>
+    </tr>
+  
+</table>
+
+<div id = "cart_menu">
+  <div id = "buttons_position">
+  <%= button_to "Empty cart", {:controller => "store", :action => "empty_cart"}, :confirm => 'Are you sure?', :class => "cart_button1" %>
+  <%= button_to"Go to ckeckout", {:controller => "store", :action => "checkout"}, :class => "cart_button2" %>
+  </div>
+</div>
+

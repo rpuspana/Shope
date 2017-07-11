@@ -1,0 +1,46 @@
+<div id="product-list">
+
+  <% if (@search_results == :results_found) || @search_results == :no_search %> 
+      <!-- OK message, background green -->
+      <p id="index_green_message"><%= flash[:notice] %></p>
+  <%else%>
+      <p id="index_red_message"><%= flash[:notice] %></p>
+  <%end %>
+  
+  <h1>Listing all books</h1>
+  
+  <table>
+      <% for product in @products %>
+       
+        <tr class="list-line">
+          <td>
+            <%= image_tag product.image_url, :class => 'list-image' %>
+          </td>
+          
+          <td class="list-description">
+            <dl>
+              <dt><%=h product.title %></dt>
+              <dd><%=h truncate(product.description, :length => 80) %></dd>
+              <dd style="font-size:12px; font-weight:bold;margin-top:4px">Price :
+                   <%=currency_euro(product.price) -%>
+                   <%# button_tag '', 'buy2.jpg', :id => product.id, :class => 'button' %>
+                   <!-- passes the product's id back to the app -->
+                 <%= button_to "Buy", :action => 'add_to_cart', :id => product.id %>
+              </dd>
+                   
+            </dl>
+          </td>
+       </tr>
+    <% end %>
+   </table>
+</div>
+
+<br >
+    <% form_tag({:controller => "store", :action => "index"},:method => 'get') do %>
+    <h3>Search for the title of the book called
+        <%= text_field_tag :search, params[:search] %>
+        <!--<input id="search" name="search"  type="text"  -->
+        <%= submit_tag "Go!", :name => nil %>
+    </h3>
+  <% end %>
+
