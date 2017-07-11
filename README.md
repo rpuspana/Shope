@@ -43,15 +43,13 @@ The application has three types of users (client, vendor, admin), each with his 
  - search through the vendor's books
 
 ### Technologies used
-- Backend
- - Ruby
- - Ruby on Rails
- - Mongrel
- - SQLite
-- Front-end
- - JavaScript
- - HTML
- - CSS
+- Ruby
+- Ruby on Rails
+- Mongrel
+- SQLite
+- JavaScript
+- HTML
+- CSS
 
 ## Get the party started
    Read "General description of a Ruby on Rails project" document to better understand a Ruby on Rails project and find out more about the technology
